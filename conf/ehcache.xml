@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ehcache>
+    <diskStore path="java.io.tmpdir"/>   
+     <!-- 默认cache  -->
+	<defaultCache 
+		maxElementsInMemory="10000" 
+		diskPersistent="true"
+		eternal="true" 
+		timeToIdleSeconds="3600" 
+		timeToLiveSeconds="3600" 
+		overflowToDisk="true" 
+	/>
+	<!-- 自定义cache -->
+    <cache name="91zcm_cache"
+           maxElementsInMemory="10000"
+           diskPersistent="true"
+           eternal="false"
+           overflowToDisk="true"
+           timeToIdleSeconds="900"
+           timeToLiveSeconds="1800"
+           memoryStoreEvictionPolicy="LFU"
+     />
+</ehcache>
