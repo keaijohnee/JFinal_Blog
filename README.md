@@ -25,3 +25,4 @@ JFinal_Blog是基于JFinal1.5开源系统搭建的博客系统，以91zcm.com �
 2、数据库在db文件加载，sql文件和psc文件均是Navicat导出的；
 3、后台地址：http://ip:port/sysadmin 登录账号和密码均是admin;
 4、项目可以直接运行：CommonConfig.java 使用jetty启动。
+
