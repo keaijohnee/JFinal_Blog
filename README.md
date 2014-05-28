@@ -23,7 +23,11 @@ JFinal_Blog是基于JFinal1.5开源系统搭建的博客系统，以91zcm.com �
 7、将MyEclipse中运行的启动类独立成com.zcm.starter.Starter.java方便启动。
 
 二、开源说明：
+
 1、小站模板是仿照百度搜索结果自己用table布局来写的顺便练习一下css；
+
 2、部分页面（例如：首页）可以实现缓存，目前使用EHCache来作为缓存；
+
 3、感谢@JFinal作者的开源精神，JFinal真的很不错，很简单，功能强大，方便开发者；
+
 4、演示地址：http://www.91zcm.com/
