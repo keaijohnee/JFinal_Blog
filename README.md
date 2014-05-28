@@ -19,10 +19,9 @@ JFinal_Blog是基于JFinal1.5开源系统搭建的博客系统，以91zcm.com �
 2、部分页面（例如：首页）可以实现缓存，目前使用EHCache来作为缓存；
 3、感谢@JFinal作者的开源精神，JFinal真的很不错，很简单，功能强大，方便开发者；
 4、演示地址：http://www.91zcm.com/
-5、截图：
+
 
 使用说明：
-
 1、项目是基于MyEclipse8.5开发的，web容器使用的是tomcat，下载代码后直接导入MyEclipse即可以使用；
 2、数据库在db文件加载，sql文件和psc文件均是Navicat导出的；
 3、后台地址：http://ip:port/sysadmin 登录账号和密码均是admin;
