@@ -48,7 +48,6 @@ import com.zcm.web.website.Website;
  */
 public class AdminController extends Controller {
 	
-	
 	/**
 	 * KindEditor JSP
 	 * 
@@ -523,6 +522,7 @@ public class AdminController extends Controller {
 			vo.setTitle(getPara("title"));
 			vo.setRemark(getPara("remark"));
 			LuceneUtil.addIndex(vo);
+			//SiteMapHttpUtils.postSiteMap();
 			setAttr("msg", "添加成功");
 		}
 		CacheKit.removeAll(EhcacheConst.ZcmCache);
