@@ -30,7 +30,9 @@ import com.zcm.utils.DateUtils;
 import com.zcm.utils.EhcacheConst;
 import com.zcm.utils.LuceneUtil;
 import com.zcm.utils.OperateImage;
+import com.zcm.utils.PingUtils;
 import com.zcm.utils.ReadPropertity;
+import com.zcm.utils.SiteMapHttpUtils;
 import com.zcm.utils.StringUtils;
 import com.zcm.vo.AdminVO;
 import com.zcm.vo.LuceneVO;
@@ -480,6 +482,8 @@ public class AdminController extends Controller {
 		c.set("addtime", getPara("addtime"));
 		String tags = getPara("tags")==null?"":getPara("tags");
 		String[] tagArr = StringUtils.replace(tags).split(",");
+		/**获取文章分类**/
+		Category category = Category.dao.findFirst("select * from category where cid = ?",getPara("cid"));
 		if(!aid.equals("")){
 			c.set("aid", aid);
 			Db.update("article", "aid", c);
@@ -522,7 +526,13 @@ public class AdminController extends Controller {
 			vo.setTitle(getPara("title"));
 			vo.setRemark(getPara("remark"));
 			LuceneUtil.addIndex(vo);
-			//SiteMapHttpUtils.postSiteMap();
+			
+			/**添加到百度博客Ping中**/
+			String shareURL = "http://www.91zcm.com/" + category.getStr("url") + "/" + record.getInt("aid") + ".html";
+			PingUtils.pingBaidu(shareURL);
+			/**添加到百度SiteMap中**/
+			SiteMapHttpUtils.postSiteMap();
+			
 			setAttr("msg", "添加成功");
 		}
 		CacheKit.removeAll(EhcacheConst.ZcmCache);
