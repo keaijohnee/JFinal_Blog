@@ -531,7 +531,7 @@ public class AdminController extends Controller {
 			String shareURL = "http://www.91zcm.com/" + category.getStr("url") + "/" + record.getInt("aid") + ".html";
 			PingUtils.pingBaidu(shareURL);
 			/**添加到百度SiteMap中**/
-			SiteMapHttpUtils.postSiteMap();
+			SiteMapHttpUtils.postSiteMap(shareURL);
 			
 			setAttr("msg", "添加成功");
 		}

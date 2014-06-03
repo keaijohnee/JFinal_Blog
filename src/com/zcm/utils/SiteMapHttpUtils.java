@@ -1,10 +1,12 @@
 package com.zcm.utils;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.methods.PostMethod;
+import com.jiangge.utils.DateUtils;
 
 /**
  * 百度文章SiteMap工具
@@ -23,16 +25,49 @@ public class SiteMapHttpUtils {
 	
 	/**
 	 * 百度SiteMap
-	 * @return
-	 * @throws HttpException
-	 * @throws IOException
+	 * @param articleURL
 	 */
-	public static void postSiteMap() throws HttpException, IOException{
-		HttpClient httpClient = new HttpClient();  
-		PostMethod postMethod = new PostMethod(siteMapURL);  
-		httpClient.executeMethod(postMethod); 
-		String response = postMethod.getResponseBodyAsString();  
-		System.out.println("百度SiteMap:\n" + response);
+	public static void postSiteMap(String articleURL) {  
+        try {  
+            URL url = new URL(siteMapURL);  
+            URLConnection con = url.openConnection();  
+            con.setDoOutput(true);  
+            con.setRequestProperty("Pragma:", "no-cache");  
+            con.setRequestProperty("Cache-Control", "no-cache");  
+            con.setRequestProperty("Content-Type", "text/xml");  
+            OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream());      
+            String xmlInfo = SiteMapHttpUtils.getXmlInfo(articleURL);  
+            out.write(new String(xmlInfo.getBytes("ISO-8859-1")));  
+            out.flush();  
+            out.close();  
+        } catch (MalformedURLException e) {  
+            e.printStackTrace();  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+	
+	/**
+	 * 组装SiteMap需要的XML文件
+	 * @param url
+	 * @return
+	 */
+	private static String getXmlInfo(String url){
+		StringBuffer xmlData = new StringBuffer("");
+		xmlData.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		xmlData.append("<urlset>");
+		xmlData.append("<url>");
+		xmlData.append("<loc><![CDATA[");
+		xmlData.append(url);
+		xmlData.append("]]></loc>");
+		xmlData.append("<lastmod>");
+		xmlData.append(DateUtils.getNowTime(DateUtils.DATE_SMALL_STR));
+		xmlData.append("</lastmod>");
+		xmlData.append("<changefreq>daily</changefreq>");
+		xmlData.append("<priority>0.8</priority>");	
+		xmlData.append("</url>");	
+		xmlData.append("</urlset>");
+		return xmlData.toString();
 	}
 	
 }
