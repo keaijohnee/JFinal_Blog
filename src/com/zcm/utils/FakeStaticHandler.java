@@ -24,7 +24,9 @@ public class FakeStaticHandler extends Handler {
 				String[] params = newTarget.substring(newTarget.indexOf("?")+1, newTarget.length()).split("&");
 				for(String strs:params){
 					String[] sarr = strs.split("=");
-					request.setAttribute(sarr[0], sarr[1]);
+					if(null!=sarr && sarr.length==2){
+						request.setAttribute(sarr[0], sarr[1]);
+					}
 				}
 			}
 		}

@@ -271,6 +271,7 @@ public class LuceneUtil {
 		StringBuffer aids = new StringBuffer();
 		Hits hits = null;
 		try {
+			word = QueryParser.escape(word);
 			IndexSearcher searcher = new IndexSearcher(LucenePath);
 		    String[] queries = {word,word};
 		    String[] fields = {"title", "remark"};
