@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -19,6 +20,7 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.wltea.analyzer.IKSegmentation;
 import org.wltea.analyzer.Lexeme;
+
 import com.zcm.vo.LuceneVO;
 
 /**
@@ -32,9 +34,22 @@ import com.zcm.vo.LuceneVO;
 public class LuceneUtil {
 	
 	private static String LucenePath = null;
+	private static IndexSearcher searcher = null;
 	
 	static {
 		LucenePath = ReadPropertity.getProperty("lucenePath");
+	}
+	
+	/**
+	 * 获取indexSearcher
+	 * @return
+	 * @throws Exception
+	 */
+	public static IndexSearcher getIndexSearcher() throws Exception{
+    	if(null == searcher){
+    		searcher = new IndexSearcher(LucenePath);
+    	}
+	    return searcher;
 	}
 	
 	/**
@@ -237,7 +252,7 @@ public class LuceneUtil {
 		Hits hits = null;
 		try {
 			word = QueryParser.escape(word);
-			IndexSearcher searcher = new IndexSearcher(LucenePath);
+			IndexSearcher searcher = LuceneUtil.getIndexSearcher();
 		    String[] queries = {word,word};
 		    String[] fields = {"title", "remark"};
 		    BooleanClause.Occur[] flags  = {BooleanClause.Occur.SHOULD, BooleanClause.Occur.SHOULD};
@@ -272,7 +287,7 @@ public class LuceneUtil {
 		Hits hits = null;
 		try {
 			word = QueryParser.escape(word);
-			IndexSearcher searcher = new IndexSearcher(LucenePath);
+			IndexSearcher searcher = LuceneUtil.getIndexSearcher();
 		    String[] queries = {word,word};
 		    String[] fields = {"title", "remark"};
 		    BooleanClause.Occur[] flags  = {BooleanClause.Occur.SHOULD, BooleanClause.Occur.SHOULD };
