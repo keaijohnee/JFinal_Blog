@@ -22,6 +22,18 @@ JFinal_Blog是基于JFinal1.5开源系统搭建的博客系统，以91zcm.com �
 
 7、将MyEclipse中运行的启动类独立成com.zcm.starter.Starter.java方便启动。
 
+
+
+3、版本V2.0： 
+
+1、添加百度Ping服务；
+
+2、添加百度SiteMap服务；
+
+3、解决Lucene全文检索出现"too many open files "的bug问题；
+
+4、解决Linux中tomcat容器乱码问题（URLEncoding="UTF-8"）；
+
 二、开源说明：
 
 1、小站模板是仿照百度搜索结果自己用table布局来写的顺便练习一下css；
