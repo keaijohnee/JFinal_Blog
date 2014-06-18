@@ -77,7 +77,7 @@ public class ArticleController extends Controller {
 	public void search() throws Exception{
 		String word = getPara("word")==null?"":getPara("word");
 		if(!"".equals(word)){
-			word = new String(word.getBytes("iso-8859-1"),"UTF-8");
+			//word = new String(word.getBytes("iso-8859-1"),"UTF-8");
 			word = StringUtils.getSearchWord(word);
 			setAttr("word", word);
 			List<ArticleVO> newarticleList = new ArrayList<ArticleVO>();
