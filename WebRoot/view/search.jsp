@@ -83,5 +83,6 @@
 	</tr>
 	<jsp:include page="common/footer.jsp"/>
   </table>
+  <jsp:include page="common/ad250.jsp"/>
 </body>
 </html>
